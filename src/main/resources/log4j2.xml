@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{DEFAULT} %p [%t] %-40.40c{1.} : %m%n%ex
+		</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+
+		<RollingFile name="RollingFile" fileName="logs/app.log"
+			filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="1 GB" />
+			</Policies>
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+
+		<asyncLogger name="com.synavos.maps" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+		
+		<asyncLogger name="com.synavos.maps.init" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+
+		<asyncLogger name="com.synavos.maps.services" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+
+		<asyncLogger name="com.synavos.maps.google" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+
+		<asyncLogger name="com.synavos.maps.cache" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+
+		<asyncLogger name="com.synavos.maps.models.custom" level="TRACE"
+			additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+			
+		</asyncLogger>
+
+		<asyncRoot level="WARN">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="RollingFile" />
+		</asyncRoot>
+
+	</Loggers>
+</Configuration>
